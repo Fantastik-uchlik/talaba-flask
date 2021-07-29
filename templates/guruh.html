@@ -2,9 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Guruhlar bo`limi</title>
 </head>
 <body>
+<h1>Guruhlar</h1>
+<hr>
+<h2>Guruh qo'shish</h2>
+    <form action="/guruh" method="post">
+        <label for="nom">Nom: </label>
+        <input type="text" name="nom" id="nom" >
+        <br>
+         <label for="kod">Kod: </label>
+        <input type="text" name="kod" id="kod">
+        <br>
+         <label for="tili">Tili: </label>
+        <textarea name="tili" id="tili">
+        </textarea>
+        <br>
+        <input type="submit" value="Saqlash">
+        <input type="reset" value="Tozalash">
+    </form>
+<h2>Guruhlar ro'yxati</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>nom</th>
+                <th>kod</th>
+                <th>tili</th>
+                <th colspan="2">amal</th>
+            </tr>
+        </thead>
 
+        <tbody>
+        {% if guruhlar %}
+            {% for y in guruhlar %}
+
+                <tr>
+                    <td>{{y.id}}</td>
+                    <td>{{y.nom}}</td>
+                    <td>{{y.kod}}</td>
+                    <td>{{y.tili}}</td>
+                    <td><a href="/guruh/ochirish?id={{y.id}}">O'chirish</a> </td>
+                    <td><a href="/guruh?tahrirlash={{y.id}}">Tahrirlash</a> </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
 </body>
 </html>
