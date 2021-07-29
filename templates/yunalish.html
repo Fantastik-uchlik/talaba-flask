@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Yunalishlar bo`limi</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>nom</th>
+                <th>kod</th>
+                <th>izoh</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% if yunalishlar %}
+            {% for y in yunalishlar %}
+
+                <tr>
+                    <td>{{y.id}}</td>
+                    <td>{{y.nom}}</td>
+                    <td>{{y.kod}}</td>
+                    <td>{{y.izoh}}</td>
+
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+</body>
+</html>
