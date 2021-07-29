@@ -2,7 +2,7 @@ from config.data_source import db
 
 
 class Yunalish(db.Model):
-    id = db.Column("uuid",db.Integer, primary_key=True, autoincrement=True, as_uuid=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nom = db.Column(db.String(100))
     kod = db.Column(db.String(15))
     izoh = db.Column(db.String(200))
