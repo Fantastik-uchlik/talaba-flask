@@ -30,7 +30,7 @@
                 <th>nom</th>
                 <th>kod</th>
                 <th>izoh</th>
-                <th>amal</th>
+                <th colspan="2">amal</th>
             </tr>
         </thead>
 
@@ -44,6 +44,7 @@
                     <td>{{y.kod}}</td>
                     <td>{{y.izoh}}</td>
                     <td><a href="/yunalish/ochirish?id={{y.id}}">O'chrish</a> </td>
+                    <td><a href="/yunalish?tahrirlash={{y.id}}">Tahrirlash</a> </td>
                 </tr>
             {% endfor %}
         {% endif %}
