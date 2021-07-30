@@ -11,3 +11,9 @@ class YunalishService():
 
     def deleteById(self, id):
         return self.yr.deleteById(id)
+
+    def getById(self, tahrirlashId):
+        return self.yr.findById(tahrirlashId)
+
+    def update(self, yunalish):
+        return self.yr.update(yunalish)

@@ -18,3 +18,11 @@ class YunalishRepo():
         db.session.delete(m)
         db.session.commit()
         return True
+
+    def update(self, yunalish):
+        y = self.findById(yunalish.id)
+        y.nom = yunalish.nom
+        y.kod = yunalish.kod
+        y.izoh = yunalish.izoh
+        db.session.commit()
+        return True

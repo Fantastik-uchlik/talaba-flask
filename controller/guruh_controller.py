@@ -2,8 +2,10 @@ from flask import Blueprint, render_template, request, redirect, url_for
 
 from model.guruh import Guruh
 from service.guruh_service import GuruhService
+from service.yunalish_service import YunalishService
 
 gs = GuruhService()
+ys = YunalishService()
 
 guruh_url = Blueprint("guruh", __name__, template_folder='../templates')
 
@@ -25,11 +27,12 @@ def delete():
 
 def royxat():
     guruhlar = gs.getAll()
-    return render_template("guruh.html", guruhlar=guruhlar)
+    yunalishlar = ys.getAll()
+    return render_template("guruh.html", guruhlar=guruhlar, yunalishlar=yunalishlar)
 
 
 def qoshish(g):
-    guruh = Guruh(g['nom'], g['kod'], g['tili'])
+    guruh = Guruh(g['nom'], g['yunalish_id'], g['yil'], g['til'])
     gs.create(guruh)
     return royxat()
 

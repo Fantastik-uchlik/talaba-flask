@@ -3,34 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <title>Yunalishlar bo`limi</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  
+  
 </head>
 <body>
+{% include "header.html" %}
 <h1>Yunalishlar</h1>
+
 <hr>
-<h2>Yunalish qo'shish</h2>
-    <form action="/yunalish" method="post">
-        <label for="nom">Nom: </label>
-        <input type="text" name="nom" id="nom" >
-        <br>
-         <label for="kod">Kod: </label>
-        <input type="text" name="kod" id="kod">
-        <br>
-         <label for="izoh">Izoh: </label>
-        <textarea name="izoh" id="izoh">
-        </textarea>
-        <br>
-        <input type="submit" value="Saqlash">
-        <input type="reset" value="Tozalash">
-    </form>
+{% if yunalish  %}
+<div class="card">
+        
+        <div class="card-header">{{yunalish.id}} - id li yunalishni tahrirlash</div>
+        <div class="card-body">
+            <form action="/yunalish/tahrirlash" method="post">
+                <div class="form-group">
+                    <label for="id">ID: </label>
+                    <input class="form-control" type="text" name="id" id="id" value="{{yunalish.id}}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="nom">Nom: </label>
+                    <input class="form-control" type="text" name="nom" id="nom" value="{{yunalish.nom}}">
+                </div>
+                <br>
+                 <label for="kod">Kod: </label>
+                <input type="text" name="kod" id="kod" value="{{yunalish.kod}}">
+                <br>
+                 <label for="izoh">Izoh: </label>
+                <textarea name="izoh" id="izoh" data-value="{{yunalish.izoh}}">
+                </textarea>
+                <br>
+                <input class="btn" type="submit" value="Tahrirlash">
+                <a class="btn" href="/yunalish">Bekor qilish</a>
+            </form>
+
+        </div>
+    </div>
+</div>    
+
+        
+{% else %}
+    <h2>Yunalish qo'shish</h2>
+        <form action="/yunalish" method="post">
+            <label for="nom">Nom: </label>
+            <input type="text" name="nom" id="nom" >
+            <br>
+             <label for="kod">Kod: </label>
+            <input type="text" name="kod" id="kod">
+            <br>
+             <label for="izoh">Izoh: </label>
+            <textarea name="izoh" id="izoh">
+            </textarea>
+            <br>
+            <input class="btn" type="submit" value="Saqlash">
+            <input class="btn" type="reset" value="Tozalash">
+        </form>
+{% endif %}
 <h2>Yunalishlar ro'yxati</h2>
-    <table>
+    <table class="table table-dark">
         <thead>
             <tr>
                 <th>id</th>
                 <th>nom</th>
                 <th>kod</th>
                 <th>izoh</th>
-                <th colspan="2">amal</th>
+                <th >amal</th>
             </tr>
         </thead>
 
@@ -43,12 +81,19 @@
                     <td>{{y.nom}}</td>
                     <td>{{y.kod}}</td>
                     <td>{{y.izoh}}</td>
-                    <td><a href="/yunalish/ochirish?id={{y.id}}">O'chirish</a> </td>
-                    <td><a href="/yunalish?tahrirlash={{y.id}}">Tahrirlash</a> </td>
+                    <td><a class="btn" href="/yunalish/ochirish?id={{y.id}}">O'chirish</a> <a class="btn" href="/yunalish?tahrirlash={{y.id}}">Tahrirlash</a> </td>
                 </tr>
             {% endfor %}
         {% endif %}
         </tbody>
     </table>
+
+
+     <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  
 </body>
 </html>
