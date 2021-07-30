@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Talabalar bo`limi</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
-<body>
-{% include "header.html" %}
-<h1>Talabalar</h1>
-<hr>
-<h2>Talaba qo'shish</h2>
-    <form action="/talaba" method="post">
-        <label for="ism">Ism: </label>
-        <input type="text" name="ism" id="ism" >
-        <br>
-         <label for="familiya">Familiya: </label>
-        <input type="text" name="familiya" id="familiya">
-        <br>
-         <label for="telefon">Telefon raqami: </label>
-        <textarea name="telefon" id="telefon">
-        </textarea>
-        <br>
-        <input type="submit" value="Saqlash">
-        <input type="reset" value="Tozalash">
-    </form>
-<h2>Talabalar ro'yxati</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>ism</th>
-                <th>familiya</th>
-                <th>telefon</th>
-                <th colspan="2">amal</th>
-            </tr>
-        </thead>
 
-        <tbody>
-        {% if talabalar %}
-            {% for y in talabalar %}
+<body>
+    <div class="container">
+        {% include "header.html" %}
+        <h1>Talabalar</h1>
+        <hr>
+        <h2>Talaba qo'shish</h2>
+        <form action="/talaba" method="post">
+            <label for="ism">Ism: </label>
+            <input type="text" name="ism" id="ism">
+            <br>
+            <label for="familiya">Familiya: </label>
+            <input type="text" name="familiya" id="familiya">
+            <br>
+            <label for="telefon">Telefon raqami: </label>
+            <textarea name="telefon" id="telefon">
+        </textarea>
+            <br>
+            <input type="submit" value="Saqlash">
+            <input type="reset" value="Tozalash">
+        </form>
+        <h2>Talabalar ro'yxati</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>ism</th>
+                    <th>familiya</th>
+                    <th>telefon</th>
+                    <th colspan="2">amal</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% if talabalar %}
+                {% for y in talabalar %}
 
                 <tr>
                     <td>{{y.id}}</td>
@@ -49,9 +53,11 @@
                     <td><a href="/talaba/ochirish?id={{y.id}}">O'chirish</a> </td>
                     <td><a href="/talaba?tahrirlash={{y.id}}">Tahrirlash</a> </td>
                 </tr>
-            {% endfor %}
-        {% endif %}
-        </tbody>
-    </table>
+                {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
 </body>
+
 </html>

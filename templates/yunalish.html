@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +8,7 @@
   
 </head>
 <body>
+<div class="container">
 {% include "header.html" %}
 <h1>Yunalishlar</h1>
 
@@ -61,7 +62,7 @@
         </form>
 {% endif %}
 <h2>Yunalishlar ro'yxati</h2>
-    <table class="table table-dark">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>id</th>
@@ -81,12 +82,14 @@
                     <td>{{y.nom}}</td>
                     <td>{{y.kod}}</td>
                     <td>{{y.izoh}}</td>
-                    <td><a class="btn" href="/yunalish/ochirish?id={{y.id}}">O'chirish</a> <a class="btn" href="/yunalish?tahrirlash={{y.id}}">Tahrirlash</a> </td>
+                    <td><a href="/yunalish/ochirish?id={{y.id}}"><button class="class=btn btn-primary">O'chirish </button></a>
+                        <a href="/yunalish?tahrirlash={{y.id}}"><button class="class=btn btn-primary">Tahrirlash</button></a> </td>
                 </tr>
             {% endfor %}
         {% endif %}
         </tbody>
     </table>
+</div>
 
 
      <!-- Optional JavaScript -->
