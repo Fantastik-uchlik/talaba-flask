@@ -13,11 +13,29 @@ guruh_url = Blueprint("guruh", __name__, template_folder='../templates')
 @guruh_url.route("/guruh", methods=['GET', 'POST', 'DELETE', 'UPDATE'])
 def index():
     if request.method == 'GET':
+        tahrirlashId = request.args.get('tahrirlash')
+        if tahrirlashId:
+            g = gs.getById(tahrirlashId)
+            if g:
+                return ozgartirish(g)
         return royxat()
     elif request.method == 'POST':
         return qoshish(request.form)
     elif request.method == 'DELETE':
         return ochirish(request.args.get('id'))
+
+def ozgartirish(g):
+    guruhlar = gs.getAll()
+    return render_template("guruh.html", guruh = g, guruhlar = guruhlar)
+
+
+@guruh_url.route("/guruh/tahrirlash", methods = ['POST'])
+def update():
+    g = request.form
+    guruh = Guruh(g['nom'], g['yunalish_id'], g['yil'], g['til'])
+    guruh.id = g['id']
+    gs.update(guruh)
+    return redirect('/guruh')
 
 
 @guruh_url.route("/guruh/ochirish")

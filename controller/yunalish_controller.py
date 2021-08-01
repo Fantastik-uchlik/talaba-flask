@@ -25,7 +25,7 @@ def index():
 
 @yunalish_url.route("/yunalish/ochirish")
 def delete():
-    return ochirish(request.args.get('id'))\
+    return ochirish(request.args.get('id'))
 
 @yunalish_url.route("/yunalish/tahrirlash", methods=['POST'])
 def update():

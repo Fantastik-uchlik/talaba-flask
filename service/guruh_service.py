@@ -11,3 +11,10 @@ class GuruhService():
 
     def deleteById(self, id):
         return self.gr.deleteById(id)
+
+    def getById(self, tahrirlashId):
+        return self.gr.findById(tahrirlashId)
+
+    def update(self, guruh):
+        return self.gr.update(guruh)
+

@@ -15,12 +15,60 @@
         <h1>Guruhlar</h1>
         <hr>
         <h2>Guruh qo'shish</h2>
+        {% if guruh %}
+        <div class="card">
+            <h3>
+                <div class="card-header">{{ guruh.id }} - id li talabani tahrirlash </div>
+            </h3>
+            <div class="card-body">
+                <form action="/guruh" method="post">
+                    <div class="form-group">
+                        <label for="nom">ID: </label>
+                        <input class="form-control" type="text" value="{{guruh.id}}" name="nom" id="nom" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="nom">Nom: </label>
+                        <input class="form-control" type="text" value="{{guruh.nom}}" name="nom" id="nom">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="yunalish_id">Yunalish: </label>
+                        <select class="form-control" name="yunalish_id" id="yunalish_id" value={{guruh.yunalish.yunalish_id}}>
+                            {% if yunalishlar %}
+                            {% for y in yunalishlar %}
+                            <option value="{{y.id}}">{{y.nom}}</option>
+                            {% endfor %}
+                            {% endif %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="til">Til: </label>
+                        <select class="form-control" name="til" id="til" value="{{guruh.til}}">
+                            <option value="O`zbek tili">O`zbek tili</option>
+                            <option value="Русский">Русский</option>
+                            <option value="Qoraqalpoq tili">Qoraqalpoq tili</option>
+                            <option value="Ingliz tili">Ingliz tili</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="yil">Yil: </label>
+                        <input class="form-control" name="yil" id="yil" value="{{guruh.yil}}" />
+                    </div>
+                    <input type="submit" value="Saqlash">
+                    <input type="reset" value="Tozalash">
+                </form>
+            </div>
+        </div>
+        {% else %}
+
+
         <div class="card">
             <div class="card-body">
                 <form action="/guruh" method="post">
                     <div class="form-group">
                         <label for="nom">Nom: </label>
-                        <input placeholder="Guruhni nomi yoki raqamini kiriting" class="form-control" type="text" name="nom" id="nom">
+                        <input placeholder="Guruhni nomi yoki raqamini kiriting" class="form-control" type="text"
+                            name="nom" id="nom">
 
                     </div>
                     <div class="form-group">
@@ -40,27 +88,28 @@
                             <option value="Русский">Русский</option>
                             <option value="Qoraqalpoq tili">Qoraqalpoq tili</option>
                             <option value="Ingliz tili">Ingliz tili</option>
-                          </select>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="yil">Yil: </label>
                         <input class="form-control" name="yil" id="yil" />
                     </div>
-                    <input type="submit" value="Saqlash">
-                    <input type="reset" value="Tozalash">
+                    <input type="submit" value="Tahrirlash">
+                    <button> <a href="/guruh">Bekor qilish</a></button>
                 </form>
             </div>
         </div>
+        {% endif %}
         <h2>Guruhlar ro'yxati</h2>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>id</th>
-                    <th>nom</th>
-                    <th>yunalish</th>
-                    <th>til</th>
-                    <th>yil</th>
-                    <th>amal</th>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Yunalish</th>
+                    <th>Til</th>
+                    <th>Yil</th>
+                    <th></th>
                 </tr>
             </thead>
 
@@ -74,8 +123,11 @@
                     <td>{{y.yunalish.nom}}</td>
                     <td>{{y.til}}</td>
                     <td>{{y.yil}}</td>
-                    <td><a href="/guruh/ochirish?id={{y.id}}">O'chirish</a>
-                        <a href="/guruh?tahrirlash={{y.id}}">Tahrirlash</a>
+                    <td><a href="/guruh/ochirish?id={{y.id}}"><button class="class=btn btn-primary">O'chirish
+                            </button></a>
+                        <a href="/guruh?tahrirlash={{y.id}}"><button
+                                class="class=btn btn-primary">Tahrirlash</button></a>
+                    </td>
                     </td>
                 </tr>
                 {% endfor %}
