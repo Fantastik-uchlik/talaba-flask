@@ -26,7 +26,8 @@ def index():
 
 def ozgartirish(g):
     guruhlar = gs.getAll()
-    return render_template("guruh.html", guruh = g, guruhlar = guruhlar)
+    yunalishlar = ys.getAll()
+    return render_template("guruh.html", guruh = g, guruhlar = guruhlar, yunalishlar = yunalishlar)
 
 
 @guruh_url.route("/guruh/tahrirlash", methods = ['POST'])

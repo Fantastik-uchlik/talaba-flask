@@ -18,13 +18,13 @@
         {% if guruh %}
         <div class="card">
             <h3>
-                <div class="card-header">{{ guruh.id }} - id li talabani tahrirlash </div>
+                <div class="card-header">{{ guruh.id }} - id li guruhni tahrirlash </div>
             </h3>
             <div class="card-body">
                 <form action="/guruh" method="post">
                     <div class="form-group">
-                        <label for="nom">ID: </label>
-                        <input class="form-control" type="text" value="{{guruh.id}}" name="nom" id="nom" readonly>
+                        <label for="id">ID: </label>
+                        <input class="form-control" type="text" value="{{guruh.id}}" name="id" id="id" readonly>
                     </div>
                     <div class="form-group">
                         <label for="nom">Nom: </label>
@@ -33,21 +33,28 @@
                     </div>
                     <div class="form-group">
                         <label for="yunalish_id">Yunalish: </label>
-                        <select class="form-control" name="yunalish_id" id="yunalish_id" value={{guruh.yunalish.yunalish_id}}>
+                        <select class="form-control" name="yunalish_id" id="yunalish_id">
+                            <option value="" selected disabled hidden>Yunalishni tanlang</option>
                             {% if yunalishlar %}
                             {% for y in yunalishlar %}
-                            <option value="{{y.id}}">{{y.nom}}</option>
+                            <option value="{{y.id}}" {% if y.id == guruh.yunalish_id%} selected {% endif %}>{{y.kod}} - {{y.nom}}
+                            </option>
                             {% endfor %}
                             {% endif %}
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="til">Til: </label>
-                        <select class="form-control" name="til" id="til" value="{{guruh.til}}">
+
+                        <select class="form-control" name="til" id="til">
+                            <option value="" selected disabled hidden>Tilni tanlang</option>
                             <option value="O`zbek tili">O`zbek tili</option>
                             <option value="Русский">Русский</option>
                             <option value="Qoraqalpoq tili">Qoraqalpoq tili</option>
                             <option value="Ingliz tili">Ingliz tili</option>
+                            <option value="boshqa tillar">boshqa tillar</option>
+                            <option value="{{guruh.til}}" selected>{{guruh.til}}</option>
+
                         </select>
                     </div>
                     <div class="form-group">
@@ -84,6 +91,7 @@
                     <div class="form-group">
                         <label for="til">Til: </label>
                         <select class="form-control" placeholder="Tilni tanlang" name="til" id="til">
+                            <option value="" selected disabled hidden>Tilni tanlang</option>
                             <option value="O`zbek tili">O`zbek tili</option>
                             <option value="Русский">Русский</option>
                             <option value="Qoraqalpoq tili">Qoraqalpoq tili</option>
