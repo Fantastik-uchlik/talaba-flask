@@ -1,4 +1,6 @@
-from flask import Flask
+from flask import Flask, request, url_for, render_template
+from werkzeug.utils import redirect
+
 from config.data_source import DATABASE_URL, SECRET_KEY, db
 
 from controller.guruh_controller import guruh_url
@@ -20,6 +22,9 @@ app.config['SECRET_KEY'] = SECRET_KEY
 db.init_app(app)
 app.app_context().push()
 db.create_all()
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

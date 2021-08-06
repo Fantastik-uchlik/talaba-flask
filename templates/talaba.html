@@ -7,57 +7,124 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
+<style>
+    .box {
+        min-height: 300px;
+        margin-top: 20px;
+    }
+
+    .box .box-1 {
+        float: left;
+        width: 50%;
+        padding: 50px;
+    }
+
+    .src {
+        clear: both;
+    }
+
+    
+</style>
 
 <body>
-    <div class="container">
+    <br><br><br>
+    <div class="container ">
         {% include "header.html" %}
-        <h1>Talabalar</h1>
+        <h1 style="color: black;text-align: center;"><i class="fa fa-graduation-cap" aria-hidden="true"></i>
+            Talabalar bo`limi
+        </h1>
         <hr>
-        <h2>Talaba qo'shish</h2>
-        <form action="/talaba" method="post">
-            <label for="ism">Ism: </label>
-            <input type="text" name="ism" id="ism">
-            <br>
-            <label for="familiya">Familiya: </label>
-            <input type="text" name="familiya" id="familiya">
-            <br>
-            <label for="telefon">Telefon raqami: </label>
-            <textarea name="telefon" id="telefon">
-        </textarea>
-            <br>
-            <input type="submit" value="Saqlash">
-            <input type="reset" value="Tozalash">
-        </form>
-        <h2>Talabalar ro'yxati</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>ism</th>
-                    <th>familiya</th>
-                    <th>telefon</th>
-                    <th colspan="2">amal</th>
-                </tr>
-            </thead>
+        <div class="row">
+            <h2 class="col-sm" style="color: blue;text-align: center;"><i class="fa fa-plus" aria-hidden="true"></i>
+                Talaba qo'shish</h2>
+            <h2 class="col-sm" style="text-align: center; color: blue "><i class="fa fa-align-justify"
+                    aria-hidden="true"></i> Talabalar ro'yxati</h2>
+        </div>
+        <div class="card ">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="card-body ">
+                        <form action="/talaba" method="post">
+                            <div class="form-group ">
+                                <label for="ism">Ism: </label>
+                                <input placeholder="Talaba ismini kiriting...." class="form-control" type="text"
+                                    name="ism" id="ism">
+                                <br>
+                                <label for="familiya">Familiya: </label>
+                                <input placeholder="Talaba familiyasini kiriting...." class="form-control" type="text"
+                                    name="familiya" id="familiya">
+                                <br>
+                                <label for="telefon">Telefon raqami: </label>
+                                <input placeholder="Telefon raqamni kiriting...." class="form-control" type="number"
+                                    name="telefon" id="telefon">
 
-            <tbody>
-                {% if talabalar %}
-                {% for y in talabalar %}
+                            </div><br><br>
+                            <input
+                                style="background-color: green;border-radius: 3px; color: white;font-family: cursive;box-shadow: green;"
+                                type="submit" value="Saqlash">&nbsp;&nbsp;
+                            <input
+                                style="background-color: red;border-radius: 3px; color: white;font-family: cursive;box-shadow: red;"
+                                type="reset" value="Tozalash">
+                        </form>
+                    </div>
+                </div>
 
-                <tr>
-                    <td>{{y.id}}</td>
-                    <td>{{y.ism}}</td>
-                    <td>{{y.familiya}}</td>
-                    <td>{{y.telefon}}</td>
-                    <td><a href="/talaba/ochirish?id={{y.id}}">O'chirish</a> </td>
-                    <td><a href="/talaba?tahrirlash={{y.id}}">Tahrirlash</a> </td>
-                </tr>
-                {% endfor %}
-                {% endif %}
-            </tbody>
-        </table>
-    </div>
+                <div class="col-sm">
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>ism</th>
+                                <th>familiya</th>
+                                <th>telefon</th>
+                                <th>amal</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% if talabalar %}
+                            {% for y in talabalar %}
+
+                            <tr>
+                                <td>{{y.id}}</td>
+                                <td>{{y.ism}}</td>
+                                <td>{{y.familiya}}</td>
+                                <td>{{y.telefon}}</td>
+
+
+                                <td>
+
+                                    <a href="/guruh/ochirish?id={{y.id}}"><i style="color: red;" class="fa fa-trash"
+                                            aria-hidden="true"></i></a>&nbsp;&nbsp;
+                                    <a href="/guruh?tahrirlash={{y.id}}"><i style="color: green;"
+                                            class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+</body>
+
+</html>
+
+
 </body>
 
 </html>

@@ -1,102 +1,126 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Yunalishlar bo`limi</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  
-  
+    <title>Yo`nalishlar bo`limi</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
+<style>
+    .box {
+        min-height: 300px;
+        margin-top: 20px;
+    }
+
+    .box .box-1 {
+        float: left;
+        width: 50%;
+        padding: 50px;
+    }
+
+    .src {
+        clear: both;
+    }
+</style>
+
 <body>
-<div class="container">
-{% include "header.html" %}
-<h1>Yunalishlar</h1>
-
-<hr>
-{% if yunalish  %}
-<div class="card">
-        
-        <div class="card-header">{{yunalish.id}} - id li yunalishni tahrirlash</div>
-        <div class="card-body">
-            <form action="/yunalish/tahrirlash" method="post">
-                <div class="form-group">
-                    <label for="id">ID: </label>
-                    <input class="form-control" type="text" name="id" id="id" value="{{yunalish.id}}" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="nom">Nom: </label>
-                    <input class="form-control" type="text" name="nom" id="nom" value="{{yunalish.nom}}">
-                </div>
-                <br>
-                 <label for="kod">Kod: </label>
-                <input type="text" name="kod" id="kod" value="{{yunalish.kod}}">
-                <br>
-                 <label for="izoh">Izoh: </label>
-                <textarea name="izoh" id="izoh" data-value="{{yunalish.izoh}}">
-                </textarea>
-                <br>
-                <input class="btn" type="submit" value="Tahrirlash">
-                <a class="btn" href="/yunalish">Bekor qilish</a>
-            </form>
-
+    <br><br><br>
+    <div class="container ">
+        {% include "header.html" %}
+        <h1 style="color: black;text-align: center;"><i class="fa fa-align-justify"
+            aria-hidden="true"></i> Yo`nalishlar bo`limi
+        </h1>
+        <hr>
+        <div class="row">
+            <h2 class="col-sm" style="color: blue;text-align: center;"><i class="fa fa-plus" aria-hidden="true"></i>
+                Yo`nalish qo'shish</h2>
+            <h2 class="col-sm" style="text-align: center; color: blue "><i class="fa fa-align-justify"
+                    aria-hidden="true"></i> Yo`nalishlar ro'yxati</h2>
         </div>
-    </div>
-</div>    
-
-        
-{% else %}
-    <h2>Yunalish qo'shish</h2>
-        <form action="/yunalish" method="post">
-            <label for="nom">Nom: </label>
-            <input type="text" name="nom" id="nom" >
-            <br>
-             <label for="kod">Kod: </label>
-            <input type="text" name="kod" id="kod">
-            <br>
-             <label for="izoh">Izoh: </label>
-            <textarea name="izoh" id="izoh">
-            </textarea>
-            <br>
-            <input class="btn" type="submit" value="Saqlash">
-            <input class="btn" type="reset" value="Tozalash">
-        </form>
-{% endif %}
-<h2>Yunalishlar ro'yxati</h2>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>nom</th>
-                <th>kod</th>
-                <th>izoh</th>
-                <th >amal</th>
-            </tr>
-        </thead>
-
-        <tbody>
-        {% if yunalishlar %}
-            {% for y in yunalishlar %}
-
-                <tr>
-                    <td>{{y.id}}</td>
-                    <td>{{y.nom}}</td>
-                    <td>{{y.kod}}</td>
-                    <td>{{y.izoh}}</td>
-                    <td><a href="/yunalish/ochirish?id={{y.id}}"><button class="class=btn btn-primary">O'chirish </button></a>
-                        <a href="/yunalish?tahrirlash={{y.id}}"><button class="class=btn btn-primary">Tahrirlash</button></a> </td>
-                </tr>
-            {% endfor %}
-        {% endif %}
-        </tbody>
-    </table>
-</div>
+        <div class="card ">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="card-body ">
+                        <form action="/yunalish" method="post">
 
 
-     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  
+                            <div class="form-group">
+
+                                <div class="form-group "></div>
+                                <label for="nom">Nom: </label>
+                                <input placeholder="Yo`nalish nomini kiriting...." class="form-control" type="text"
+                                    name="nom" id="nom">
+
+                                <label for="kod">Kod: </label>
+                                <input placeholder="Yo`nalish kodini kiriting...." class="form-control" type="number"
+                                    name="kod" id="kod">
+
+                                <label for="izoh">Izoh: </label>
+                                <input placeholder="Izoh kiriting...." class="form-control" type="text" name="izoh"
+                                    id="izoh">
+                            </div>
+                            <input style="background-color: green; color: white;font-family: cursive;box-shadow: green;"
+                                type="submit" value="Saqlash">&nbsp;&nbsp;
+                            <input style="background-color: red; color: white;font-family: cursive;box-shadow: red;"
+                                type="reset" value="Tozalash">
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-sm">
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>nom</th>
+                                <th>kod</th>
+                                <th>izoh</th>
+                                <th>amal</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% if yunalishlar %}
+                            {% for y in yunalishlar %}
+
+                            <tr>
+                                <td>{{y.id}}</td>
+                                <td>{{y.nom}}</td>
+                                <td>{{y.kod}}</td>
+                                <td>{{y.izoh}}</td>
+
+
+                                <td>
+
+                                    <a href="/yunalish/ochirish?id={{y.id}}"><i style="color: red;" class="fa fa-trash"
+                                            aria-hidden="true"></i></a>&nbsp;&nbsp;
+                                    <a href="/yunalish?tahrirlash={{y.id}}"><i style="color: green;"
+                                            class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
 </body>
+
+</html>
+</body>
+
 </html>
