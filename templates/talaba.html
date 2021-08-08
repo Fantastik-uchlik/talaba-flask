@@ -39,92 +39,98 @@
             Talabalar bo`limi
         </h1>
         <hr>
-        <div class="row">
-            <h2 class="col-sm" style="color: blue;text-align: center;"><i class="fa fa-plus" aria-hidden="true"></i>
-                Talaba qo'shish</h2>
-            <h2 class="col-sm" style="text-align: center; color: blue "><i class="fa fa-align-justify"
-                    aria-hidden="true"></i> Talabalar ro'yxati</h2>
-        </div>
-        <div class="card ">
-            <div class="row">
-                <div class="col-sm">
-                    <div class="card-body ">
-                        <form action="/talaba" method="post">
-                            <div class="form-group ">
-                                <label for="ism">Ism: </label>
-                                <input placeholder="Talaba ismini kiriting...." class="form-control" type="text"
-                                    name="ism" id="ism">
-                                <br>
-                                <label for="familiya">Familiya: </label>
-                                <input placeholder="Talaba familiyasini kiriting...." class="form-control" type="text"
-                                    name="familiya" id="familiya">
-                                <br>
-                                <label for="telefon">Telefon raqami: </label>
-                                <input placeholder="Telefon raqamni kiriting...." class="form-control" type="number"
-                                    name="telefon" id="telefon">
-
-                            </div><br><br>
-                            <input
-                                style="background-color: green;border-radius: 3px; color: white;font-family: cursive;box-shadow: green;"
-                                type="submit" value="Saqlash">&nbsp;&nbsp;
-                            <input
-                                style="background-color: red;border-radius: 3px; color: white;font-family: cursive;box-shadow: red;"
-                                type="reset" value="Tozalash">
-                        </form>
+        <h2>Talaba qo'shish</h2>
+        {% if talaba %}
+        <div class="card">
+            <h3><div class="card-header">{{ talaba.id }} - id li talabani tahrirlash </div></h3>
+            <div class="card-body">
+                <form action="/talaba/tahrirlash" method="post">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="id">ID: </label>
+                            <input class="form-control" type="text" name="id" id="id" value="{{talaba.id}}" readonly>
+                        </div>
+                        <label for="ism">Ism: </label>
+                        <input class="form-control" type="text" name="ism" id="ism" value="{{talaba.ism}}">
                     </div>
-                </div>
-
-                <div class="col-sm">
-
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>id</th>
-                                <th>ism</th>
-                                <th>familiya</th>
-                                <th>telefon</th>
-                                <th>amal</th>
-
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {% if talabalar %}
-                            {% for y in talabalar %}
-
-                            <tr>
-                                <td>{{y.id}}</td>
-                                <td>{{y.ism}}</td>
-                                <td>{{y.familiya}}</td>
-                                <td>{{y.telefon}}</td>
-
-
-                                <td>
-
-                                    <a href="/guruh/ochirish?id={{y.id}}"><i style="color: red;" class="fa fa-trash"
-                                            aria-hidden="true"></i></a>&nbsp;&nbsp;
-                                    <a href="/guruh?tahrirlash={{y.id}}"><i style="color: green;"
-                                            class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                            {% endif %}
-                        </tbody>
-                    </table>
-                </div>
+                    <div class="form-group">
+                        <label for="familiya">Familiya: </label>
+                        <input type="text" class="form-control" name="familiya" id="familiya" value="{{talaba.familiya}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefon">Telefon raqami: </label>
+                        <input name="telefon" class="form-control" id="telefon" value="{{talaba.telefon}}"> 
+                    </div>
+                    <input  type="submit" value="Tahrirlash">
+                    <button> <a href="/talaba">Bekor qilish</a></button>
+                </form>
+            </div>
+        </div>  
+        {% else %}
+        <div class="card">
+            <div class="card-body">
+                <form action="/talaba" method="post">
+                    <div class="form-group">
+                        <label for="ism">Ism: </label>
+                        <input class="form-control" placeholder="Ismini kiriting" type="text" name="ism" id="ism">
+                    </div>
+                    <div class="form-group">
+                        <label for="familiya">Familiya: </label>
+                        <input type="text" class="form-control" placeholder="Familiyani kiriting" name="familiya"
+                            id="familiya">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefon">Telefon raqami: </label>
+                        <input name="telefon" class="form-control" placeholder="Shaxsiy telefon raqam" id="telefon">
+                    </div>
+                    <input type="submit" value="Saqlash">
+                    <input type="reset" value="Tozalash">
+                </form>
             </div>
         </div>
+        {% endif %}
+        <h2>Talabalar ro'yxati</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Ism</th>
+                    <th>Familiya</th>
+                    <th>Telefon</th>
+                    <th></th>
+                </tr>
+            </thead>
 
+            <tbody>
+                {% if talabalar %}
+                {% for y in talabalar %}
 
+                <tr>
+                    <td>{{y.id}}</td>
+                    <td>{{y.ism}}</td>
+                    <td>{{y.familiya}}</td>
+                    <td>{{y.telefon}}</td>
+                    <td><a href="/talaba/ochirish?id={{y.id}}"><button class="class=btn btn-primary">O'chirish
+                            </button></a>
+                        <a href="/talaba?tahrirlash={{y.id}}"><button
+                                class="class=btn btn-primary">Tahrirlash</button></a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
 
-
-
-
-</body>
-
-</html>
-
-
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -18,3 +18,11 @@ class TalabaRepo():
         db.session.delete(m)
         db.session.commit()
         return True
+
+    def update(self, talaba):
+        t = self.findById(talaba.id)
+        t.ism = talaba.ism
+        t.familiya = talaba.familiya
+        t.telefon = talaba.telefon
+        db.session.commit()
+        return True

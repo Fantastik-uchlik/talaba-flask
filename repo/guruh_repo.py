@@ -18,3 +18,12 @@ class GuruhRepo():
         db.session.delete(m)
         db.session.commit()
         return True
+
+    def update(self, guruh):
+        g = self.findById(guruh.id)
+        g.nom = guruh.nom
+        g.yunalish = guruh.yunalish
+        g.til = guruh.til
+        g.yil = guruh.yil
+        db.session.commit()
+        return True
